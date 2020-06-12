@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package dfuse.ethereum.trxdb.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-eth/pb/dfuse/ethereum/trxdb/v1;pbtrxdb";
+
+import "dfuse/ethereum/codec/v1/codec.proto";
+
+message TrxTraceRow {
+  // Primary key to include: transaction_id and block_id
+
+  dfuse.ethereum.codec.v1.TransactionTrace trx_trace = 1;
+  dfuse.ethereum.codec.v1.BlockHeader block_header = 2;
+}
+
+message BlockRow {
+  // Key will be block_id
+
+  // We want another index also:
+  //    blockTime:blockID = \01
+
+  dfuse.ethereum.codec.v1.Block block = 1;
+  dfuse.ethereum.codec.v1.TransactionRefs trace_refs = 2;
+}
