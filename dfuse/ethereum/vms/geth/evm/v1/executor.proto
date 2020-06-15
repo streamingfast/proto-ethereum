@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package dfuse.ethereum.vms.geth.evm.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-eth/pb/dfuse/ethereum/vms/geth/evm/v1;pbevm";
+
+import "dfuse/ethereum/codec/v1/codec.proto";
+
+service Executor {
+  rpc Execute(ExecRequest) returns (ExecResponse);
+  rpc Replay(ExecReplay) returns (ExecResponse);
+}
+
+message ExecRequest {
+  dfuse.ethereum.codec.v1.Transaction transaction = 1;
+
+  // Define the exact block reference against which this
+  // execution should execute. If this is not set, the service
+  // assumes the HEAD block should be used, whatever that means.
+  //
+  // This is usually the last block seen and recorded by the service
+  // while connected to a block source.
+  dfuse.ethereum.codec.v1.BlockRef atBlock = 2;
+}
+
+message ExecReplay {
+  // The transaction to retrieve original data from.
+  bytes hash = 1;
+
+  // Define the exact block reference against which this
+  // execution should execute. If this is not set, the service
+  // assumes the HEAD block should be used, whatever that means.
+  //
+  // This is usually the last block seen and recorded by the service
+  // while connected to a block source.
+  dfuse.ethereum.codec.v1.BlockRef atBlock = 2;
+}
+
+message ExecResponse {
+  dfuse.ethereum.codec.v1.TransactionTrace trace = 1;
+}
+
+// Enumerates accepted network. While this is not used in
+// the service types like those above, this enum is used
+// inside the code instead of coding the enum + string to name
+// mappings in Go code directy.
+enum Network {
+  NETWORK_MAINNET = 0;
+  NETWORK_ROPSTEN = 1;
+}

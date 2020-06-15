@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package dfuse.ethereum.trxstatetracker.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-eth/pb/dfuse/ethereum/trxstatetracker/v1;pbtrxtracker";
+
+import "dfuse/ethereum/codec/v1/codec.proto";
+
+service TrxStateTracker {
+    rpc State(Request) returns (stream dfuse.ethereum.codec.v1.TransactionState);
+
+    rpc Pooled(PooledRequest) returns (stream dfuse.ethereum.codec.v1.Transaction);
+}
+
+message PooledRequest {
+    repeated bytes filter_addresses = 1;
+    FilterField filter_field = 2;
+
+    enum FilterField {
+        FROM_OR_TO = 0;
+        FROM = 1;
+        TO = 2;
+    }
+
+}
+
+message Request {
+    string transactionId = 2;
+}
