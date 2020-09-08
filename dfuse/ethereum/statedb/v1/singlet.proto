@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package dfuse.ethereum.statedb.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/statedb/v1;pbstatedb";
+
+message BalanceValue {
+  // Balance represents the Wei value in hexadecimal format that can be used to
+  // create a `math.BigInt` instance.
+  bytes balance = 1;
+}
+
+message NonceValue {
+  uint64 nonce = 1;
+}

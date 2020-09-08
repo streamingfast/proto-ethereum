@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package dfuse.ethereum.statedb.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/statedb/v1;pbstatedb";
+
+import "dfuse/bstream/v1/bstream.proto";
+
+service State {
+	rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+	rpc GetNonce(GetNonceRequest) returns (GetNonceResponse);
+}
+
+message GetBalanceRequest {
+	bytes address = 1;
+	dfuse.bstream.v1.BlockRef block_ref = 2;
+}
+
+message GetBalanceResponse {
+	// Balance represents the Wei value in hexadecimal format that can be used to
+  	// create a `math.BigInt` instance.
+	bytes balance = 1;
+}
+
+message GetNonceRequest {
+	bytes address = 1;
+	dfuse.bstream.v1.BlockRef block_ref = 2;
+}
+
+message GetNonceResponse {
+	uint64 nonce = 1;
+}
