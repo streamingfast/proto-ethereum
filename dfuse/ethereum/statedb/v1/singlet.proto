@@ -13,3 +13,7 @@ message BalanceValue {
 message NonceValue {
   uint64 nonce = 1;
 }
+
+message StateValue {
+  bytes value = 1;
+}

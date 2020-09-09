@@ -9,6 +9,7 @@ import "dfuse/bstream/v1/bstream.proto";
 service State {
 	rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
 	rpc GetNonce(GetNonceRequest) returns (GetNonceResponse);
+	rpc GetState(GetStateRequest) returns (GetStateResponse);
 }
 
 message GetBalanceRequest {
@@ -29,4 +30,14 @@ message GetNonceRequest {
 
 message GetNonceResponse {
 	uint64 nonce = 1;
+}
+
+message GetStateRequest {
+	bytes address = 1;
+	bytes key = 2;
+	dfuse.bstream.v1.BlockRef block_ref = 3;
+}
+
+message GetStateResponse {
+	bytes data = 1;
 }
