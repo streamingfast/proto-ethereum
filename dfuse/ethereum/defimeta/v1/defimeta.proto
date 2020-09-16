@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package dfuse.ethereum.defimeta.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/defimeta/v1;pbdefimeta";
+
+service State {
+	rpc StreamOpportunity(StreamOpportunityRequest) returns (stream Opportunity);
+}
+
+message StreamOpportunityRequest {
+	uint64 amount = 1;
+}
+
+message Opportunity {
+	repeated Pair pairs = 1;
+	uint64 amount = 2;
+}
+
+message Pair {
+	Token from = 1;
+	Token to = 2;
+	double rate = 3;
+}
+
+message Token {
+	bytes address = 1;
+	string name = 2;
+	string symbol = 3;
+	uint32 decimals = 4;
+}
