@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package dfuse.ethereum.tokenmeta.v1;
+
+option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/tokenmeta/v1;pbtokenmeta";
+
+service State {
+	rpc StreamToken(StreamTokenRequest) returns (stream Token);
+}
+
+message StreamTokenRequest {
+}
+
+message Token {
+	bytes address = 1;
+	string name = 2;
+	string symbol = 3;
+	uint32 decimals = 4;
+}
