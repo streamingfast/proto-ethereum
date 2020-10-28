@@ -6,6 +6,10 @@ option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/tokenm
 
 service State {
 	rpc StreamToken(StreamTokenRequest) returns (stream Token);
+	rpc StreamPair(StreamPairRequest) returns (stream Pair);
+	rpc StreamLabel(StreamLabelRequest) returns (stream Label);
+	rpc GetLabel(GetLabelRequest) returns (Label);
+
 }
 
 message StreamTokenRequest {
@@ -16,4 +20,31 @@ message Token {
 	string name = 2;
 	string symbol = 3;
 	uint32 decimals = 4;
+}
+
+message StreamPairRequest {
+	bytes filter_factory_addr = 1;
+	bytes filter_token0_addr = 2;
+	bytes filter_token1_addr = 3;
+	bytes filter_pair_addr = 4;
+}
+
+message Pair {
+	bytes address = 1;
+	Token token0 = 2;
+	Token token1 = 3;
+	string label = 4;
+	bytes factory_addr = 5;
+}
+
+message StreamLabelRequest {
+}
+
+message Label {
+	string label = 1;
+	bytes address = 2;
+}
+
+message GetLabelRequest {
+	bytes address = 1;
 }

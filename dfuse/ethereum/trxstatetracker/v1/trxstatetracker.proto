@@ -7,23 +7,40 @@ option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/trxsta
 import "dfuse/ethereum/codec/v1/codec.proto";
 
 service TrxStateTracker {
-    rpc State(Request) returns (stream dfuse.ethereum.codec.v1.TransactionState);
+    // rpc State(Request) returns (stream dfuse.ethereum.codec.v1.TransactionState);
+    // rpc Pooled(PooledRequest) returns (stream dfuse.ethereum.codec.v1.Transaction);
 
-    rpc Pooled(PooledRequest) returns (stream dfuse.ethereum.codec.v1.Transaction);
+
+    rpc StateUpdates(StateUpdatesRequest) returns (stream dfuse.ethereum.codec.v1.TransactionState);
+}
+
+message StateUpdatesRequest {
+    // these 2 fields are mutually exclusive
+    string filter_expr = 1; // we are not going to fetch things pass irreversibility
+    string transaction_id = 2; // we are going to fetch
+
+    // the max value of confirmation would be 20
+    uint64 max_confirmations = 3;
+
+    repeated dfuse.ethereum.codec.v1.TransactionState.State filter_states = 6;
+    repeated dfuse.ethereum.codec.v1.TransactionState.Transition filter_transitions = 7;
+}
+
+message Request {
+    string transactionId = 2;
 }
 
 message PooledRequest {
     repeated bytes filter_addresses = 1;
     FilterField filter_field = 2;
 
+//    from in ["0xa", "0xb"]
+//    to in ["0xa", "0xb"]
+//    from in ["0xa", "0xb"] || to in ["0xa", "0xb"]
+
     enum FilterField {
         FROM_OR_TO = 0;
         FROM = 1;
         TO = 2;
     }
-
-}
-
-message Request {
-    string transactionId = 2;
 }
