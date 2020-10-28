@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.search.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/search/v1;pbsearcheos";
+option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/search/v1;pbsearcheth";
 
 import "dfuse/ethereum/codec/v1/codec.proto";
 
@@ -24,4 +24,3 @@ message BlockTrxPayload {
   dfuse.ethereum.codec.v1.BlockHeader block_header = 2;
   dfuse.ethereum.codec.v1.TransactionTrace trace = 3;
 }
-
