@@ -7,10 +7,6 @@ option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/trxsta
 import "dfuse/ethereum/codec/v1/codec.proto";
 
 service TrxStateTracker {
-    // rpc State(Request) returns (stream dfuse.ethereum.codec.v1.TransactionState);
-    // rpc Pooled(PooledRequest) returns (stream dfuse.ethereum.codec.v1.Transaction);
-
-
     rpc StateUpdates(StateUpdatesRequest) returns (stream dfuse.ethereum.codec.v1.TransactionState);
 }
 
@@ -24,23 +20,4 @@ message StateUpdatesRequest {
 
     repeated dfuse.ethereum.codec.v1.TransactionState.State filter_states = 6;
     repeated dfuse.ethereum.codec.v1.TransactionState.Transition filter_transitions = 7;
-}
-
-message Request {
-    string transactionId = 2;
-}
-
-message PooledRequest {
-    repeated bytes filter_addresses = 1;
-    FilterField filter_field = 2;
-
-//    from in ["0xa", "0xb"]
-//    to in ["0xa", "0xb"]
-//    from in ["0xa", "0xb"] || to in ["0xa", "0xb"]
-
-    enum FilterField {
-        FROM_OR_TO = 0;
-        FROM = 1;
-        TO = 2;
-    }
 }
