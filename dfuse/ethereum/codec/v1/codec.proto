@@ -87,6 +87,7 @@ message TransactionState {
     TRANS_FORKED = 3;
     TRANS_CONFIRMED = 4;
     TRANS_REPLACED = 5;
+    TRANS_SPECULATIVELY_EXECUTED = 6; // makes speculative traces available on a PENDING transaction. May not be emitted if the transaction is seen a block before
   }
 
   enum State {
