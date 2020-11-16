@@ -6,6 +6,11 @@ option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/tokenm
 
 service State {
 	rpc StreamToken(StreamTokenRequest) returns (stream Token);
+	rpc GetToken(GetTokenRequest) returns (Token);
+}
+
+message GetTokenRequest {
+   string address = 1;
 }
 
 message StreamTokenRequest {
