@@ -9,6 +9,7 @@ service State {
 }
 
 message StreamTokenRequest {
+   repeated string addresses = 1;
 }
 
 message Token {
