@@ -69,13 +69,13 @@ message TransactionState {
   State current_state = 2;
   Transition transition = 10;
 
-  string transaction_id = 11;
+  bytes hash = 11;
   Transaction trx = 3;
   BlockHeader block_header = 4;
   TransactionTrace transaction_traces = 5;
   uint64 confirmation = 6;
   BlockHeader head_block_header = 7;
-  string replaced_by_id = 8;
+  bytes replaced_by_hash = 8;
 
   google.protobuf.Timestamp pending_first_seen = 12;
   google.protobuf.Timestamp pending_last_seen = 13;

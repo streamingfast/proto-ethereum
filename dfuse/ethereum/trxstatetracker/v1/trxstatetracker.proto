@@ -12,7 +12,7 @@ service TrxStateTracker {
 }
 
 message TrackSingleRequest {
-    string transaction_id = 1;
+    bytes hash = 1;
 
     uint64 max_confirmations = 3;
     repeated dfuse.ethereum.codec.v1.TransactionState.State filter_states = 6;
