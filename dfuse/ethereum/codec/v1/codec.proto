@@ -210,7 +210,6 @@ message Call {
   /* hex representation of the hash -> preimage */
   map<string, string> keccak_preimages = 20;
   repeated StorageChange storage_changes = 21;
-
   repeated BalanceChange balance_changes = 22;
   repeated NonceChange nonce_changes = 24;
   repeated Log logs = 25;
@@ -257,19 +256,23 @@ message Call {
   // status `EXECUTED`
   bool state_reverted = 30;
 
-  repeated CallERC20Bal erc20_balance_changes = 50;
-  CallERC20Xfer erc20_transfer = 51;
+  repeated ERC20BalanceChange erc20_balance_changes = 50;
+  repeated ERC20TransferEvent erc20_transfer_events = 51;
 }
 
-message CallERC20Bal {
-  bytes owner = 1;
+message ERC20BalanceChange {
+  bytes holder_address = 1;
   BigInt old_balance = 2;
   BigInt new_balance = 3;
+  BigInt delta = 4;
+  bytes storage_key = 5;
 }
-message CallERC20Xfer {
+
+message ERC20TransferEvent {
   bytes from = 1;
   bytes to = 2;
   BigInt amount = 3;
+  string method_name = 4;
 }
 
 enum CallType {
