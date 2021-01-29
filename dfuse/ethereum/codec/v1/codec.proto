@@ -256,6 +256,20 @@ message Call {
   // In the transaction above, while Call #2 and Call #3 would have the
   // status `EXECUTED`
   bool state_reverted = 30;
+
+  repeated CallERC20Bal erc20_balance_changes = 50;
+  CallERC20Xfer erc20_transfer = 51;
+}
+
+message CallERC20Bal {
+  bytes owner = 1;
+  BigInt old_balance = 2;
+  BigInt new_balance = 3;
+}
+message CallERC20Xfer {
+  bytes from = 1;
+  bytes to = 2;
+  BigInt amount = 3;
 }
 
 enum CallType {
