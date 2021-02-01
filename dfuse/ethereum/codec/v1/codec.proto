@@ -264,8 +264,6 @@ message ERC20BalanceChange {
   bytes holder_address = 1;
   BigInt old_balance = 2;
   BigInt new_balance = 3;
-
-  bytes storage_key = 4;
 }
 
 message ERC20TransferEvent {
