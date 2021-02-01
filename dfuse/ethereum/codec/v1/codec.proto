@@ -272,7 +272,6 @@ message ERC20TransferEvent {
   bytes from = 1;
   bytes to = 2;
   BigInt amount = 3;
-  string method_name = 4;
 }
 
 enum CallType {
