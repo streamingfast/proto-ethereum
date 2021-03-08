@@ -16,6 +16,7 @@ message Block {
 
   repeated TransactionTrace transaction_traces = 10;
   repeated BalanceChange balance_changes = 11;
+  repeated CodeChange code_changes = 20;
 }
 
 // BlockWithRefs is a lightweight block, with traces and transactions
