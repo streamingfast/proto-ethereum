@@ -365,6 +365,9 @@ message GasChange {
     REASON_REVERT = 17;
     REASON_SELF_DESTRUCT = 18;
     REASON_STATIC_CALL = 19;
+
+    // Added in Berlin fork (Geth 1.10+)
+    REASON_STATE_COLD_ACCESS = 20;
   }
 }
 
