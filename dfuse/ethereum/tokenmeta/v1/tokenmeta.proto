@@ -22,5 +22,9 @@ message Token {
 	string name = 2;
 	string symbol = 3;
 	uint32 decimals = 4;
-	uint64 totalSupply = 5;
+	BigInt totalSupply = 5;
+}
+
+message BigInt {
+	bytes bytes = 1;
 }
