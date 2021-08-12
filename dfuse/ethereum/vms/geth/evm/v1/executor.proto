@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.vms.geth.evm.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/vms/geth/evm/v1;pbevm";
+option go_package = "github.com/streamingfast/sf-ethereum-priv-priv/pb/dfuse/ethereum/vms/geth/evm/v1;pbevm";
 
 import "dfuse/ethereum/codec/v1/codec.proto";
 

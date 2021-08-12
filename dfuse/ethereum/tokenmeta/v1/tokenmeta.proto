@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.tokenmeta.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/tokenmeta/v1;pbtokenmeta";
+option go_package = "github.com/streamingfast/sf-ethereum-priv-priv/pb/dfuse/ethereum/tokenmeta/v1;pbtokenmeta";
 
 service State {
 	rpc StreamToken(StreamTokenRequest) returns (stream Token);

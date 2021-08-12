@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.trxstream.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/trxstream/v1;pbtrxstream";
+option go_package = "github.com/streamingfast/sf-ethereum-priv-priv/pb/dfuse/ethereum/trxstream/v1;pbtrxstream";
 
 import "dfuse/ethereum/codec/v1/codec.proto";
 

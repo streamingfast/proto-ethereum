@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.search.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/search/v1;pbsearcheth";
+option go_package = "github.com/streamingfast/sf-ethereum-priv-priv/pb/dfuse/ethereum/search/v1;pbsearcheth";
 
 import "dfuse/ethereum/codec/v1/codec.proto";
 

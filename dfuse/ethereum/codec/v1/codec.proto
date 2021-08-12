@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dfuse.ethereum.codec.v1;
 
-option go_package = "github.com/dfuse-io/dfuse-ethereum/pb/dfuse/ethereum/codec/v1;pbcodec";
+option go_package = "github.com/streamingfast/sf-ethereum/pb/dfuse/ethereum/codec/v1;pbcodec";
 
 import "google/protobuf/timestamp.proto";
 
