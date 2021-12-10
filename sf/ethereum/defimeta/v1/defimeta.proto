@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package sf.ethereum.defimeta.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/defimeta/v1;pbdefimeta";
+
+service State {
+	rpc StreamOpportunity(StreamOpportunityRequest) returns (stream Opportunity);
+}
+
+message StreamOpportunityRequest {
+	uint64 amount = 1;
+	// bytes gas_price = 2; // Gas fee at time we stream back this opportunity, Version 2
+}
+
+// Opportunity represents a potential gain from an input to an higher output amount of the
+// same token for a given path of succesive swap/currency exchange.
+message Opportunity {
+	// Pairs represents the route of pair we took to determine the opportunity. For example
+	// from `USDT -> WETH, `WETH -> LINK` and finally `LINK-> USDT`.
+	repeated Pair pairs = 1;
+
+	// OutputAmount is the amount you would get by executing this opportunity, this is the
+	// final amount you would get in the same token as your input amount.
+	bytes output_amount = 2;
+
+	// NextMidPrice represents how the opportunity affected the market as whole so it's the
+	// next prices that would be pay for the full route if another simulation was to be made.
+	double next_mid_price = 3;
+
+	//bytes gas_average_price = 4; Average for the network at time we stream back this opportunity, Version 2
+}
+
+// Pair represents a single computation execution step for a given pair.
+message Pair {
+	// From is the initial
+	Token from = 1;
+	Token to = 2;
+	bytes output_amount = 3;
+
+	// NextMidPrice represents how the execution of our trader affected this exact price so it's the
+	// next prices that would be pay for the this pair if another simulation was to be made.
+	double next_mid_price = 4;
+
+	// Slippage is the ration between the before mid price the last time the pair reserves was updated
+	// and the next_mid_price that our simulation created.
+	//double slippage = 5; Version 2
+}
+
+message Token {
+	bytes address = 1;
+	string name = 2;
+	string symbol = 3;
+	uint32 decimals = 4;
+}

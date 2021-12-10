@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package sf.ethereum.statedb.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/statedb/v1;pbstatedb";
+
+message BalanceValue {
+  // Balance represents the Wei value in hexadecimal format that can be used to
+  // create a `math.BigInt` instance.
+  bytes balance = 1;
+}
+
+message NonceValue {
+  uint64 nonce = 1;
+}
+
+message StateValue {
+  bytes value = 1;
+}

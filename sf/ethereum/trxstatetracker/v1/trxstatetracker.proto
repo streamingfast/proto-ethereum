@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package sf.ethereum.trxstatetracker.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/trxstatetracker/v1;pbtrxtracker";
+
+import "sf/ethereum/codec/v1/codec.proto";
+
+service TrxStateTracker {
+    rpc TrackSingle(TrackSingleRequest) returns (stream sf.ethereum.codec.v1.TransactionState);
+    rpc TrackMultiple(TrackMultipleRequest) returns (stream TrackMultipleResponse);
+}
+
+message TrackSingleRequest {
+    bytes hash = 1;
+
+    uint64 max_confirmations = 3;
+    repeated sf.ethereum.codec.v1.TransactionState.State filter_states = 6;
+    repeated sf.ethereum.codec.v1.TransactionState.Transition filter_transitions = 7;
+}
+
+message TrackMultipleRequest {
+    string filter_expr = 1; // SOON DEPRECATED
+
+    oneof filter {
+        AddressFilter address_filter = 8;
+        string cel_filter_expr = 9;
+    }
+
+    uint64 max_confirmations = 3;
+    repeated sf.ethereum.codec.v1.TransactionState.State filter_states = 6;
+    repeated sf.ethereum.codec.v1.TransactionState.Transition filter_transitions = 7;
+}
+
+message AddressFilter {
+    repeated string match_addresses = 1;
+    repeated FilterField match_any = 2;
+}
+
+enum FilterField {
+    FROM = 0;
+    TO = 1;
+    ERC20_FROM = 2;
+    ERC20_TO = 3;
+}
+
+message TrackMultipleResponse {
+  sf.ethereum.codec.v1.TransactionState transaction_state = 1;
+  repeated uint32 matching_calls = 2;
+}

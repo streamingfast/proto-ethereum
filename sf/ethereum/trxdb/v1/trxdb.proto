@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package sf.ethereum.trxdb.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/trxdb/v1;pbtrxdb";
+
+import "sf/ethereum/codec/v1/codec.proto";
+
+message TrxTraceRow {
+  // Primary key to include: transaction_id and block_id
+
+  sf.ethereum.codec.v1.TransactionTrace trx_trace = 1;
+  sf.ethereum.codec.v1.BlockHeader block_header = 2;
+}
+
+message BlockRow {
+  // Key will be block_id
+
+  // We want another index also:
+  //    blockTime:blockID = \01
+
+  sf.ethereum.codec.v1.Block block = 1;
+  sf.ethereum.codec.v1.TransactionRefs trace_refs = 2;
+}

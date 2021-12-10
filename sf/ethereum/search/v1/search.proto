@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package sf.ethereum.search.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/search/v1;pbsearcheth";
+
+import "sf/ethereum/codec/v1/codec.proto";
+
+message DocumentID {
+  uint64 block_num = 1;
+  uint64 action_index = 2;
+  uint64 transaction_index = 3;
+  bytes transaction_id_prefix = 4;
+}
+
+message Match {
+  repeated uint32 call_indexes = 1;
+  repeated uint32 log_indexes = 2;
+  BlockTrxPayload block = 3;
+}
+
+message BlockTrxPayload {
+  string block_id = 1;
+  sf.ethereum.codec.v1.BlockHeader block_header = 2;
+  sf.ethereum.codec.v1.TransactionTrace trace = 3;
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package sf.ethereum.statedb.v1;
+
+option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/statedb/v1;pbstatedb";
+
+import "sf/bstream/v1/bstream.proto";
+
+service State {
+	rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+	rpc GetNonce(GetNonceRequest) returns (GetNonceResponse);
+	rpc GetState(GetStateRequest) returns (GetStateResponse);
+}
+
+message GetBalanceRequest {
+	bytes address = 1;
+	sf.bstream.v1.BlockRef block_ref = 2;
+}
+
+message GetBalanceResponse {
+	// Balance represents the Wei value in hexadecimal format that can be used to
+  	// create a `math.BigInt` instance.
+	bytes balance = 1;
+}
+
+message GetNonceRequest {
+	bytes address = 1;
+	sf.bstream.v1.BlockRef block_ref = 2;
+}
+
+message GetNonceResponse {
+	uint64 nonce = 1;
+}
+
+message GetStateRequest {
+	bytes address = 1;
+	bytes key = 2;
+	sf.bstream.v1.BlockRef block_ref = 3;
+}
+
+message GetStateResponse {
+	bytes data = 1;
+}
