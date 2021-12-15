@@ -342,6 +342,8 @@ message BalanceChange {
     REASON_SUICIDE_REFUND = 11;
     REASON_SUICIDE_WITHDRAW = 13;
     REASON_CALL_BALANCE_OVERRIDE = 12;
+    // Used on chain(s) where some Ether burning happens
+    REASON_BURN = 15;
   }
 }
 
