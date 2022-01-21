@@ -47,7 +47,7 @@ message Block {
 // This can be used to unpack a [Block] when only the [BlockHeader] information
 // is required and greatly reduced required memory.
 message HeaderOnlyBlock {
-  BlockHeader header = 2;
+  BlockHeader header = 5;
 }
 
 // BlockWithRefs is a lightweight block, with traces and transactions
