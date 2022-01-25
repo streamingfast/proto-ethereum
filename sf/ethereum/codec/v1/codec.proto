@@ -214,14 +214,31 @@ message TransactionReceipt {
 }
 
 message Log {
-  // consensus
   bytes address = 1;
   repeated bytes topics = 2;
   bytes data = 3;
 
-  // supplement
-  uint32 index = 4; // position inside a trx
-  uint32 blockIndex = 6; // position inside a block
+  // Index is the index of the log relative to the transaction. This index
+  // is always populated regardless of the state revertion of the the call
+  // that emitted this log.
+  uint32 index = 4;
+
+  // BlockIndex represents the index of the log relative to the Block.
+  //
+  // An **important** notice is that this field will be 0 when the call
+  // that emitted the log has been reverted by the chain.
+  //
+  // Currently, there is two locations where a Log can be obtained:
+  // - block.transaction_traces[].receipt.logs[]
+  // - block.transaction_traces[].calls[].logs[]
+  //
+  // In the `receipt` case, the logs will be populated only when the call
+  // that emitted them has not been reverted by the chain and when in this
+  // position, the `blockIndex` is always populated correctly.
+  //
+  // In the case of `calls` case, for `call` where `stateReverted == true`,
+  // the `blockIndex` value will always be 0.
+  uint32 blockIndex = 6;
 }
 
 message Call {
