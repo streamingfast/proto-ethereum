@@ -3,7 +3,7 @@ syntax = "proto3";
 package sf.ethereum.transforms.v1;
 option go_package = "github.com/streamingfast/sf-ethereum/pb/sf/ethereum/transforms/v1;pbtransforms";
 
-message LogAddressMethodIndex {
+message LogAddressSignatureIndex {
   reserved 1,2,3; // eventually add a small bloomfilter at the beginning of the file, as further optimization
   
   repeated KeyToBitmap addresses = 4;
