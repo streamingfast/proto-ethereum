@@ -5,11 +5,28 @@ package sf.ethereum.statedb.v1;
 option go_package = "github.com/streamingfast/sf-ethereum-priv/pb/sf/ethereum/statedb/v1;pbstatedb";
 
 import "sf/bstream/v1/bstream.proto";
+import "sf/ethereum/codec/v1/codec.proto";
 
 service State {
+	rpc GetBlockHeader(GetBlockHeaderRequest) returns (GetBlockHeaderResponse);
+	rpc GetLatestBlockHeader(GetLatestBlockHeaderRequest) returns (GetBlockHeaderResponse);
+
 	rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+	rpc GetCode(GetCodeRequest) returns (GetCodeResponse);
 	rpc GetNonce(GetNonceRequest) returns (GetNonceResponse);
 	rpc GetState(GetStateRequest) returns (GetStateResponse);
+}
+
+
+message GetBlockHeaderRequest {
+	sf.bstream.v1.BlockRef block_ref = 1;
+}
+
+message GetLatestBlockHeaderRequest {
+}
+
+message GetBlockHeaderResponse {
+	sf.ethereum.codec.v1.BlockHeader header = 1;
 }
 
 message GetBalanceRequest {
@@ -21,6 +38,16 @@ message GetBalanceResponse {
 	// Balance represents the Wei value in hexadecimal format that can be used to
   	// create a `math.BigInt` instance.
 	bytes balance = 1;
+}
+
+message GetCodeRequest {
+	bytes address = 1;
+	sf.bstream.v1.BlockRef block_ref = 2;
+}
+
+message GetCodeResponse {
+	// Balance represents the accoint's set bytecode
+	bytes payload = 1;
 }
 
 message GetNonceRequest {

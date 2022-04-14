@@ -17,3 +17,7 @@ message NonceValue {
 message StateValue {
   bytes value = 1;
 }
+
+message CodeValue {
+  bytes payload = 1;
+}
