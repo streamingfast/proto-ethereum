@@ -1,9 +1,7 @@
 # Ethereum on `StreamingFast` protobuf definitions
 
-This repository is deprecated. See:
+> **Important** This is not the canonical repository of StreaminFast Protobuf definitions, they have been moved at https://github.com/streamingfast/sf-ethereum/tree/develop/proto and unused one have been removed.
 
-https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto
-
-now.
+**Deprecated** This repository holds protocol buffer definition files (`.proto`) for Ethereum on StreamingFast products.
 
 [Apache 2.0](LICENSE)
